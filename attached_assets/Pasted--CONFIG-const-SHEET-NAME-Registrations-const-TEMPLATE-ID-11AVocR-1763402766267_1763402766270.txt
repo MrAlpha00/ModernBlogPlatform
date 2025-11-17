@@ -1,0 +1,177 @@
+/**
+ * ====== CONFIG ======
+ */
+const SHEET_NAME = "Registrations";
+const TEMPLATE_ID = "11AVocRqGEuSyUi1pINGp1uN-09mDH6c7-Q_KZwcGnBI";
+const FOLDER_ID = "1IsbT0CSzMynxHpH0qtN3KMXzPSnpvyWQ";
+const EVENT_NAME = "InnovateX Tech Expo 2025";
+
+/**
+ * ========== WEB APP ENTRY ==========
+ */
+function doPost(e) {
+  return handle(e);
+}
+
+function doGet(e) {
+  return handle(e);
+}
+
+function handle(e) {
+  const requestType = e.parameter.type;
+
+  // CORS
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
+
+  // Preflight response
+  if (e.postData == null && requestType === undefined) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ success: true })
+    ).setMimeType(ContentService.MimeType.JSON)
+     .setHeaders(headers);
+  }
+
+  const method = e.parameter.method || "";
+
+  if (method === "register") {
+    const data = JSON.parse(e.postData.contents);
+    const response = registerTeam(data);
+
+    return ContentService.createTextOutput(JSON.stringify(response))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders(headers);
+  }
+
+  if (method === "certificate") {
+    const email = e.parameter.email;
+    const certs = getCertificatesByEmail(email);
+
+    return ContentService.createTextOutput(JSON.stringify(certs))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders(headers);
+  }
+
+  return ContentService.createTextOutput(
+    JSON.stringify({ success: false, message: "Invalid route" })
+  ).setMimeType(ContentService.MimeType.JSON)
+   .setHeaders(headers);
+}
+
+/**
+ * ========== REGISTRATION ==========
+ */
+function registerTeam(data) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const teamId = Utilities.getUuid();
+  const timestamp = new Date();
+
+  const members = [
+    { name: data.member1Name, email: data.member1Email },
+    { name: data.member2Name, email: data.member2Email },
+  ];
+
+  if (data.member3Name && data.member3Email) {
+    members.push({ name: data.member3Name, email: data.member3Email });
+  }
+
+  if (data.member4Name && data.member4Email) {
+    members.push({ name: data.member4Name, email: data.member4Email });
+  }
+
+  const certUrls = [];
+
+  members.forEach((m) => {
+    const certUrl = generateCertificate(
+      m.name,
+      data.projectTitle,
+      data.teamName,
+      teamId
+    );
+
+    certUrls.push({ name: m.name, email: m.email, url: certUrl });
+
+    sheet.appendRow([
+      Utilities.getUuid(),
+      data.teamName,
+      data.projectTitle,
+      m.name,
+      m.email,
+      certUrl,
+      timestamp,
+      teamId,
+    ]);
+
+    sendCertificateEmail(m.email, m.name, certUrl);
+  });
+
+  return {
+    success: true,
+    message: "Team registered successfully!",
+    teamId: teamId,
+    certificates: certUrls,
+  };
+}
+
+/**
+ * ========== CERTIFICATE GENERATION ==========
+ */
+function generateCertificate(name, project, team, teamId) {
+  const folder = DriveApp.getFolderById(FOLDER_ID);
+  const copy = DriveApp.getFileById(TEMPLATE_ID).makeCopy(`Certificate_${name}_${teamId}`, folder);
+  const doc = DocumentApp.openById(copy.getId());
+  const body = doc.getBody();
+
+  body.replaceText("{{NAME}}", name);
+
+  doc.saveAndClose();
+
+  const pdf = copy.getAs("application/pdf");
+  const pdfFile = folder.createFile(pdf).setName(`Certificate_${name}.pdf`);
+
+  copy.setTrashed(true);
+  return pdfFile.getUrl();
+}
+
+/**
+ * ========== EMAIL SENDER ==========
+ */
+function sendCertificateEmail(email, name, certUrl) {
+  const subject = "Your InnovateX Participation Certificate";
+  const message = `
+Dear ${name},
+
+Thank you for participating in ${EVENT_NAME}.
+
+Your certificate is ready.  
+Download here: ${certUrl}
+
+Best regards,
+InnovateX Team
+  `;
+
+  MailApp.sendEmail(email, subject, message);
+}
+
+/**
+ * ========== FETCH CERTIFICATE ==========
+ */
+function getCertificatesByEmail(email) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const rows = sheet.getDataRange().getValues();
+  rows.shift();
+
+  const results = rows.filter(r => r[4].toLowerCase() === email.toLowerCase())
+                      .map(r => ({
+                        name: r[3],
+                        email: r[4],
+                        certificateUrl: r[5]
+                      }));
+
+  return {
+    success: true,
+    certificates: results,
+  };
