@@ -1,0 +1,142 @@
+Build a complete frontend web application with the following requirements:
+
+🎨 UI/UX Requirements
+
+Theme: Black background with neon green accent colors
+
+Modern, minimal, professional look
+
+TailwindCSS for styling
+
+Fully mobile-first responsive (must look perfect on phones)
+
+Smooth transitions and clean font
+
+Use cards, rounded corners, neon borders, glowing green buttons
+
+📁 Project Structure
+
+Use Vite + React + TypeScript + TailwindCSS.
+
+Folder structure:
+
+src/
+  components/
+    RegistrationForm.tsx
+    CertificateDownload.tsx
+    InputField.tsx
+  pages/
+    Home.tsx
+    Register.tsx
+    Download.tsx
+  utils/
+    api.ts
+  App.tsx
+  main.tsx
+public/
+index.html
+
+📝 Pages to Create
+1️⃣ Home Page
+
+Beautiful landing page
+
+Title: “InnovateX Registration & Certificate Portal”
+
+Buttons:
+
+“Register Team”
+
+“Download Certificate”
+
+Stylish neon-green buttons
+
+Fully centered layout
+
+2️⃣ Registration Page
+
+A modern card layout with fields:
+
+Team Details
+
+Team Name
+
+Project Title
+
+Members (Mobile Friendly Section)
+
+Member 1: Name, Email (required)
+Member 2: Name, Email (required)
+Member 3: Name, Email (optional)
+Member 4: Name, Email (optional)
+
+Submit Button
+
+On submit, call API function
+api.registerTeam(data)
+
+Show loading animation
+
+Show success message in neon green
+
+3️⃣ Certificate Download Page
+
+Input: Email
+
+Button: “Check Certificate”
+
+If found: Show list of downloadable certificate URLs
+
+If not found: “Email not registered” message
+
+Neon-glowing borders for results
+
+🔗 API Integration
+
+Create a file: src/utils/api.ts with functions:
+
+export const API_BASE = "YOUR_APPS_SCRIPT_DEPLOYED_URL";
+
+export async function registerTeam(data: any) {
+  return fetch(API_BASE + "/register", {
+    method: "POST",
+    body: JSON.stringify(data),
+  }).then(res => res.json());
+}
+
+export async function getCertificate(email: string) {
+  return fetch(API_BASE + "/certificate?email=" + encodeURIComponent(email))
+    .then(res => res.json());
+}
+
+
+Use these functions in components.
+
+🧩 Components
+✔️ InputField.tsx
+
+Reusable input component
+Black card + neon green border
+Mobile-friendly
+
+✔️ RegistrationForm.tsx
+
+Handles all fields, validation, submission
+
+✔️ CertificateDownload.tsx
+
+Handles email input + showing results
+
+📦 Final Output
+
+A fully working React + Vite project
+
+Ready to export or download
+
+Mobile ready
+
+All UI applies black + neon green theme
+
+Clean folder structure
+
+Connects correctly to Google Apps Script backend
