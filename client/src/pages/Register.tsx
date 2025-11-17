@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { insertTeamSchema, type InsertTeam } from "@shared/schema";
+import { insertTeamSchema, type InsertTeam } from "@/shared/schema";
 import { cn } from "@/lib/utils";
-import { apiRequest } from "@/lib/queryClient";
+import { registerTeam } from "@/utils/api";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Register() {
@@ -35,7 +35,7 @@ export default function Register() {
 
   const registerMutation = useMutation({
     mutationFn: async (data: InsertTeam) => {
-      return apiRequest("POST", "/api/register", data);
+      return registerTeam(data);
     },
     onSuccess: () => {
       setShowSuccess(true);

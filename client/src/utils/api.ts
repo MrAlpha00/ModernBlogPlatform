@@ -1,13 +1,13 @@
-import { type InsertTeam, type Certificate } from "@shared/schema";
+import { type InsertTeam, type Certificate } from "@/shared/schema";
 
-// API Base URL - will point to our Express backend
-// In production, this would be the Google Apps Script deployed URL
-export const API_BASE = "/api";
+// Google Apps Script Web App URL
+export const API_BASE = "https://script.google.com/macros/s/AKfycbwKUOtlARMRSHI3heT14t9PJwITDidg9BxU0W_erXTQ4iY-d6supxH9d_shUdXijf0W4w/exec";
 
 export interface TeamRegistrationResponse {
   success: boolean;
   message: string;
   teamId?: string;
+  certificates?: Array<{ name: string; email: string; url: string }>;
 }
 
 export interface CertificateResponse {
@@ -20,7 +20,7 @@ export interface CertificateResponse {
  * Register a new team
  */
 export async function registerTeam(data: InsertTeam): Promise<TeamRegistrationResponse> {
-  const response = await fetch(`${API_BASE}/register`, {
+  const response = await fetch(API_BASE + "?method=register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,8 @@ export async function registerTeam(data: InsertTeam): Promise<TeamRegistrationRe
  */
 export async function getCertificate(email: string): Promise<CertificateResponse> {
   const response = await fetch(
-    `${API_BASE}/certificate?email=${encodeURIComponent(email)}`
+    API_BASE + "?method=certificate&email=" + encodeURIComponent(email),
+    { method: "GET" }
   );
 
   if (!response.ok) {

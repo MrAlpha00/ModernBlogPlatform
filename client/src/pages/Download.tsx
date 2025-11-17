@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { type Certificate } from "@shared/schema";
+import { type Certificate } from "@/shared/schema";
+import { getCertificate } from "@/utils/api";
 
 export default function Download() {
   const [email, setEmail] = useState("");
@@ -17,11 +18,7 @@ export default function Download() {
   const { data, isLoading, isError } = useQuery<{ success: boolean; certificates: Certificate[]; message?: string }>({
     queryKey: ["/api/certificate", searchEmail],
     queryFn: async () => {
-      const res = await fetch(`/api/certificate?email=${encodeURIComponent(searchEmail)}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch certificates");
-      }
-      return res.json();
+      return getCertificate(searchEmail);
     },
     enabled: !!searchEmail,
   });
