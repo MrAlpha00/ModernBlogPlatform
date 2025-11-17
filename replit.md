@@ -36,39 +36,30 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend Architecture
 
-**Server Framework**
-- **Express.js** running on Node.js with TypeScript
+**Static Frontend with Google Apps Script Backend**
+- Frontend is a static React application deployed separately
+- Backend functionality handled by Google Apps Script Web App
 - RESTful API design with two primary endpoints:
-  - `POST /api/register` - Team registration with automatic certificate generation
-  - `GET /api/certificate?email={email}` - Certificate retrieval by email
+  - `POST ?method=register` - Team registration with automatic certificate generation
+  - `GET ?method=certificate&email={email}` - Certificate retrieval by email
 
-**Request/Response Flow**
-- JSON body parsing with raw body capture for webhook support
-- Request logging middleware with timing and response capture
-- Centralized error handling with Zod validation error formatting
+**Google Apps Script Backend**
+- Handles team registration and stores data in Google Sheets
+- Generates PDF certificates from Google Docs templates
+- Sends certificates via email using MailApp service
+- Provides CORS-enabled JSON API endpoints for frontend integration
 
-**Business Logic**
-- In-memory storage implementation (`MemStorage`) for development/demo purposes
-- Automatic certificate generation for all team members (2-4) upon team registration
-- Email-based certificate lookup supporting multiple certificates per email
+**Data Storage**
+- **Google Sheets** - Stores registration data with columns:
+  - Registration ID, Team Name, Project Title, Member Name, Member Email, Certificate URL, Timestamp, Team ID
+- **Google Drive** - Stores generated PDF certificates in designated folder
+- Certificate generation uses Google Docs template with placeholders
 
-### Data Storage
-
-**Database Configuration**
-- **Drizzle ORM** configured for PostgreSQL with type-safe query building
-- **Neon Database** serverless PostgreSQL (via `@neondatabase/serverless`)
-- Schema-first design with migrations stored in `/migrations` directory
-
-**Schema Design**
-- **Teams Table**: Stores team information (teamName, projectTitle, 2-4 member names/emails)
-- **Certificates Table**: Stores individual certificates linked to teams via foreign key
-- UUID primary keys using `gen_random_uuid()`
-- Optional member fields (member3, member4) to support flexible team sizes
-
-**Data Layer Interface**
-- Abstract `IStorage` interface allows swapping between in-memory and database implementations
-- Current implementation uses in-memory storage for rapid development
-- Database schema prepared for production deployment with Drizzle migrations
+**API Integration**
+- Frontend makes direct HTTP requests to Google Apps Script Web App URL
+- Apps Script URL: `https://script.google.com/macros/s/[SCRIPT_ID]/exec`
+- Supports both GET and POST methods with method parameter for routing
+- Returns JSON responses with success status and data
 
 ### Authentication and Authorization
 
@@ -82,17 +73,20 @@ Currently, the application does not implement authentication or authorization. A
 ### External Dependencies
 
 **Third-Party Services**
-- **Neon Database** - Serverless PostgreSQL database hosting
+- **Google Apps Script** - Backend API and business logic
+- **Google Sheets** - Data storage for registrations
+- **Google Drive** - Storage for generated PDF certificates
+- **Google Docs** - Certificate template
+- **Gmail/MailApp** - Email delivery for certificates
 - **Google Fonts API** - Web fonts (Inter, Poppins, JetBrains Mono)
 
 **Certificate Generation**
-- Currently stores placeholder URLs (`https://certificates.example.com/{certificateId}`)
-- Production implementation would integrate with certificate generation service or library
+- Google Apps Script generates certificates from Google Docs template
+- PDF files are created and stored in Google Drive
+- Each certificate has a unique URL for download
+- Certificates are automatically emailed to team members upon registration
 
 **Core NPM Packages**
-- `express` - Web server framework
-- `drizzle-orm` & `drizzle-kit` - Database ORM and migrations
-- `@neondatabase/serverless` - Neon PostgreSQL driver
 - `react` & `react-dom` - UI framework
 - `@tanstack/react-query` - Server state management
 - `react-hook-form` - Form handling
@@ -104,6 +98,10 @@ Currently, the application does not implement authentication or authorization. A
 **Development Tools**
 - `vite` - Build tool and dev server
 - `typescript` - Type checking
-- `tsx` - TypeScript execution for Node.js
-- `esbuild` - Production bundling for server code
 - `@replit/vite-plugin-*` - Replit development environment integration
+
+**Deployment**
+- Static site deployment to Vercel or Render
+- Build output directory: `dist`
+- Build command: `vite build`
+- No server runtime required
