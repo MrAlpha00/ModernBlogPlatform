@@ -2,59 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* LIGHT MODE - Neon Green & Black Theme */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(0,255,0, .20);
+  --badge-outline: rgba(0,255,0, .10);
   --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-  --background: 0 0% 100%;
-  --foreground: 0 0% 9%;
-  --border: 0 0% 91%;
-  --card: 0 0% 98%;
-  --card-foreground: 0 0% 9%;
-  --card-border: 0 0% 95%;
-  --sidebar: 0 0% 96%;
-  --sidebar-foreground: 0 0% 9%;
-  --sidebar-border: 0 0% 92%;
-  --sidebar-primary: 142 76% 36%;
-  --sidebar-primary-foreground: 144 62% 97%;
-  --sidebar-accent: 0 0% 93%;
-  --sidebar-accent-foreground: 0 0% 9%;
-  --sidebar-ring: 142 76% 36%;
-  --popover: 0 0% 94%;
-  --popover-foreground: 0 0% 9%;
-  --popover-border: 0 0% 90%;
-  --primary: 142 76% 36%;
-  --primary-foreground: 144 62% 97%;
-  --secondary: 0 0% 90%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 92%;
-  --muted-foreground: 0 0% 35%;
-  --accent: 140 12% 92%;
-  --accent-foreground: 0 0% 9%;
-  --destructive: 0 84% 42%;
-  --destructive-foreground: 0 86% 97%;
-  --input: 0 0% 85%;
-  --ring: 142 76% 36%;
-  --chart-1: 142 76% 36%;
-  --chart-2: 160 64% 38%;
-  --chart-3: 173 58% 39%;
-  --chart-4: 197 37% 45%;
-  --chart-5: 220 70% 50%;
-  --font-sans: Open Sans, sans-serif;
+  --elevate-1: rgba(0,255,0, .05);
+  --elevate-2: rgba(0,255,0, .12);
+  --background: 0 0% 0%;
+  --foreground: 120 100% 95%;
+  --border: 120 100% 50%;
+  --card: 0 0% 3%;
+  --card-foreground: 120 100% 95%;
+  --card-border: 120 100% 50%;
+  --sidebar: 0 0% 2%;
+  --sidebar-foreground: 120 100% 95%;
+  --sidebar-border: 120 100% 50%;
+  --sidebar-primary: 120 100% 50%;
+  --sidebar-primary-foreground: 0 0% 0%;
+  --sidebar-accent: 0 0% 5%;
+  --sidebar-accent-foreground: 120 100% 95%;
+  --sidebar-ring: 120 100% 50%;
+  --popover: 0 0% 3%;
+  --popover-foreground: 120 100% 95%;
+  --popover-border: 120 100% 50%;
+  --primary: 120 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 120 100% 95%;
+  --muted: 0 0% 8%;
+  --muted-foreground: 120 100% 70%;
+  --accent: 120 100% 50%;
+  --accent-foreground: 0 0% 0%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 120 100% 50%;
+  --ring: 120 100% 50%;
+  --chart-1: 120 100% 50%;
+  --chart-2: 140 100% 45%;
+  --chart-3: 160 100% 40%;
+  --chart-4: 100 100% 45%;
+  --chart-5: 80 100% 50%;
+  --font-sans: 'Inter', 'Poppins', sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
-  --radius: .5rem;
-  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: .75rem;
+  --shadow-2xs: 0px 0px 8px 0px hsl(120 100% 50% / 0.3);
+  --shadow-xs: 0px 0px 12px 0px hsl(120 100% 50% / 0.4);
+  --shadow-sm: 0px 0px 16px 0px hsl(120 100% 50% / 0.5);
+  --shadow: 0px 0px 20px 0px hsl(120 100% 50% / 0.6);
+  --shadow-md: 0px 0px 24px 0px hsl(120 100% 50% / 0.7);
+  --shadow-lg: 0px 0px 28px 2px hsl(120 100% 50% / 0.8);
+  --shadow-xl: 0px 0px 32px 4px hsl(120 100% 50% / 0.9);
+  --shadow-2xl: 0px 0px 40px 6px hsl(120 100% 50% / 1);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
@@ -88,53 +88,53 @@
 }
 
 .dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
+  --button-outline: rgba(0,255,0, .20);
+  --badge-outline: rgba(0,255,0, .10);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
-  --border: 0 0% 14%;
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 98%;
-  --card-border: 0 0% 9%;
-  --sidebar: 0 0% 8%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-border: 0 0% 12%;
-  --sidebar-primary: 142 76% 42%;
-  --sidebar-primary-foreground: 144 62% 97%;
-  --sidebar-accent: 0 0% 11%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-ring: 142 76% 42%;
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 98%;
-  --popover-border: 0 0% 14%;
-  --primary: 142 76% 42%;
-  --primary-foreground: 144 62% 97%;
-  --secondary: 0 0% 14%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 13%;
-  --muted-foreground: 0 0% 65%;
-  --accent: 140 12% 12%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 84% 42%;
-  --destructive-foreground: 0 86% 97%;
-  --input: 0 0% 22%;
-  --ring: 142 76% 42%;
-  --chart-1: 142 76% 65%;
-  --chart-2: 160 64% 62%;
-  --chart-3: 173 58% 61%;
-  --chart-4: 197 37% 60%;
-  --chart-5: 220 70% 68%;
-  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  --elevate-1: rgba(0,255,0, .05);
+  --elevate-2: rgba(0,255,0, .12);
+  --background: 0 0% 0%;
+  --foreground: 120 100% 95%;
+  --border: 120 100% 50%;
+  --card: 0 0% 3%;
+  --card-foreground: 120 100% 95%;
+  --card-border: 120 100% 50%;
+  --sidebar: 0 0% 2%;
+  --sidebar-foreground: 120 100% 95%;
+  --sidebar-border: 120 100% 50%;
+  --sidebar-primary: 120 100% 50%;
+  --sidebar-primary-foreground: 0 0% 0%;
+  --sidebar-accent: 0 0% 5%;
+  --sidebar-accent-foreground: 120 100% 95%;
+  --sidebar-ring: 120 100% 50%;
+  --popover: 0 0% 3%;
+  --popover-foreground: 120 100% 95%;
+  --popover-border: 120 100% 50%;
+  --primary: 120 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 120 100% 95%;
+  --muted: 0 0% 8%;
+  --muted-foreground: 120 100% 70%;
+  --accent: 120 100% 50%;
+  --accent-foreground: 0 0% 0%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 120 100% 50%;
+  --ring: 120 100% 50%;
+  --chart-1: 120 100% 50%;
+  --chart-2: 140 100% 45%;
+  --chart-3: 160 100% 40%;
+  --chart-4: 100 100% 45%;
+  --chart-5: 80 100% 50%;
+  --shadow-2xs: 0px 0px 8px 0px hsl(120 100% 50% / 0.3);
+  --shadow-xs: 0px 0px 12px 0px hsl(120 100% 50% / 0.4);
+  --shadow-sm: 0px 0px 16px 0px hsl(120 100% 50% / 0.5);
+  --shadow: 0px 0px 20px 0px hsl(120 100% 50% / 0.6);
+  --shadow-md: 0px 0px 24px 0px hsl(120 100% 50% / 0.7);
+  --shadow-lg: 0px 0px 28px 2px hsl(120 100% 50% / 0.8);
+  --shadow-xl: 0px 0px 32px 4px hsl(120 100% 50% / 0.9);
+  --shadow-2xl: 0px 0px 40px 6px hsl(120 100% 50% / 1);
 
 /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -284,5 +284,33 @@
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
+  }
+
+  /* Neon glow animation */
+  @keyframes neon-pulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px hsl(120 100% 50% / 0.6));
+    }
+    50% {
+      filter: drop-shadow(0 0 16px hsl(120 100% 50% / 0.9));
+    }
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 10px hsl(120 100% 50% / 0.5),
+                0 0 20px hsl(120 100% 50% / 0.3),
+                0 0 30px hsl(120 100% 50% / 0.2);
+  }
+
+  .neon-glow-strong {
+    box-shadow: 0 0 15px hsl(120 100% 50% / 0.7),
+                0 0 30px hsl(120 100% 50% / 0.5),
+                0 0 45px hsl(120 100% 50% / 0.3);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(120 100% 50% / 0.8),
+                 0 0 20px hsl(120 100% 50% / 0.6),
+                 0 0 30px hsl(120 100% 50% / 0.4);
   }
 }
